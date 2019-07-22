@@ -60,10 +60,10 @@
             <github-button v-bind="getPreviewAttrs()"></github-button>
           </p>
           <div class="form-group">
-            <snippet :code="templateHTML"></snippet>
+            <mybtns :code="templateHTML"></mybtns>
           </div>
           <div class="form-group">
-            <snippet :code="scriptHTML"></snippet>
+            <mybtns :code="scriptHTML"></mybtns>
           </div>
         </div>
       </div>
@@ -72,230 +72,230 @@
 </template>
 
 <script>
-import './main.css'
-import GithubButton from 'vue-github-button'
-import Snippet from '@/components/Snippet'
+  import './main.css'
+  import GithubButton from 'vue-github-button'
+  import Mybtns from '@/components/Mybtns'
 
-export default {
-  name: 'app',
-  components: {
-    GithubButton,
-    Snippet
-  },
-  data () {
-    return {
-      types: [
-        {
-          value: 'follow',
-          icon: 'octicon-mark-github'
-        },
-        {
-          value: 'watch',
-          icon: 'octicon-eye'
-        },
-        {
-          value: 'star',
-          icon: 'octicon-star'
-        },
-        {
-          value: 'fork',
-          icon: 'octicon-repo-forked'
-        },
-        {
-          value: 'issue',
-          icon: 'octicon-issue-opened'
-        },
-        {
-          value: 'download',
-          icon: 'octicon-cloud-download'
-        }
-      ],
-      options: {
-        user: '',
-        repo: '',
-        type: null,
-        largeButton: false,
-        showCount: false,
-        standardIcon: false,
-        syntax: ((referrer) => {
-          if (/\bvue-github-button\b/i.test(referrer)) {
-            return 'vue'
-          }
-          if (/\breact-github-btn\b/i.test(referrer)) {
-            return 'react'
-          }
-          return 'html'
-        })(document.referrer)
-      },
-      timeoutID: 0
-    }
-  },
-  watch: {
-    'options.type' () {
-      this.$nextTick(() => {
-        if (document.activeElement !== this.$refs.user && document.activeElement !== this.$refs.repo) {
-          if (this.options.type === 'follow' || !this.isValidUser || (this.isValidUser && this.isValidRepo)) {
-            this.$refs.user.focus()
-          } else {
-            this.$refs.repo.focus()
-          }
-        }
-      })
+  export default {
+    name: 'app',
+    components: {
+      GithubButton,
+      Mybtns
     },
-    'attrs.href' () {
-      if (this.attrs['data-show-count']) {
-        clearTimeout(this.timeoutID)
-        this.timeoutID = setTimeout(() => {
-          this.timeoutID = 0
-        }, 300)
-      }
-    }
-  },
-  computed: {
-    isValidUser () {
-      const user = this.options.user
-      return user.length > 0 && user.length < 40 && !/[^A-Za-z0-9-]|^-|-$|--/i.test(user)
-    },
-    isValidRepo () {
-      const repo = this.options.repo
-      return repo.length > 0 && repo.length < 101 && !/[^\w-.]|\.git$|^\.\.?$/i.test(repo)
-    },
-    attrs () {
-      const options = { ...this.options }
-
-      if (!this.isValidUser || (!this.isValidRepo && options.type !== 'follow')) {
-        options.user = 'ntkme'
-        options.repo = 'github-buttons'
-      }
-
+    data () {
       return {
-        href: (() => {
-          const base = 'https://github.com'
-          const user = '/' + options.user
-          const repo = user + '/' + options.repo
-          switch (options.type) {
-            case 'follow':
-              return base + user
-            case 'watch':
-              return base + repo + '/subscription'
-            case 'star':
-              return base + repo
-            case 'fork':
-              return base + repo + '/fork'
-            case 'issue':
-              return base + repo + '/issues'
-            case 'download':
-              return base + repo + '/archive/master.zip'
-            default:
-              return base
+        types: [
+          {
+            value: 'follow',
+            icon: 'octicon-mark-github'
+          },
+          {
+            value: 'watch',
+            icon: 'octicon-eye'
+          },
+          {
+            value: 'star',
+            icon: 'octicon-star'
+          },
+          {
+            value: 'fork',
+            icon: 'octicon-repo-forked'
+          },
+          {
+            value: 'issue',
+            icon: 'octicon-issue-opened'
+          },
+          {
+            value: 'download',
+            icon: 'octicon-cloud-download'
           }
-        })(),
-        'data-text': (() => {
-          return this.$options.filters.capitalize(options.type) + (options.type === 'follow' ? ' @' + options.user : '')
-        })(),
-        'data-icon': (() => {
-          if (options.standardIcon) {
-            return
-          }
-          switch (options.type) {
-            case 'watch':
-              return 'octicon-eye'
-            case 'star':
-              return 'octicon-star'
-            case 'fork':
-              return 'octicon-repo-forked'
-            case 'issue':
-              return 'octicon-issue-opened'
-            case 'download':
-              return 'octicon-cloud-download'
-          }
-        })(),
-        'data-size': (() => {
-          if (options.largeButton) {
-            return 'large'
-          }
-        })(),
-        'data-show-count': (() => {
-          if (options.showCount) {
-            switch (options.type) {
-              case 'download':
-                return
-              default:
-                return true
+        ],
+        options: {
+          user: '',
+          repo: '',
+          type: null,
+          largeButton: false,
+          showCount: false,
+          standardIcon: false,
+          syntax: ((referrer) => {
+            if (/\bvue-github-button\b/i.test(referrer)) {
+              return 'vue'
+            }
+            if (/\breact-github-btn\b/i.test(referrer)) {
+              return 'react'
+            }
+            return 'html'
+          })(document.referrer)
+        },
+        timeoutID: 0
+      }
+    },
+    watch: {
+      'options.type' () {
+        this.$nextTick(() => {
+          if (document.activeElement !== this.$refs.user && document.activeElement !== this.$refs.repo) {
+            if (this.options.type === 'follow' || !this.isValidUser || (this.isValidUser && this.isValidRepo)) {
+              this.$refs.user.focus()
+            } else {
+              this.$refs.repo.focus()
             }
           }
-        })(),
-        'aria-label': (() => {
-          return this.$options.filters.capitalize(options.type) + (options.type === 'follow' ? ' @' + options.user : ' ' + options.user + '/' + options.repo) + ' on GitHub'
-        })()
+        })
+      },
+      'attrs.href' () {
+        if (this.attrs['data-show-count']) {
+          clearTimeout(this.timeoutID)
+          this.timeoutID = setTimeout(() => {
+            this.timeoutID = 0
+          }, 300)
+        }
       }
     },
-    templateHTML () {
-      const a = document.createElement('a')
+    computed: {
+      isValidUser () {
+        const user = this.options.user
+        return user.length > 0 && user.length < 40 && !/[^A-Za-z0-9-]|^-|-$|--/i.test(user)
+      },
+      isValidRepo () {
+        const repo = this.options.repo
+        return repo.length > 0 && repo.length < 101 && !/[^\w-.]|\.git$|^\.\.?$/i.test(repo)
+      },
+      attrs () {
+        const options = { ...this.options }
 
-      if (this.options.syntax === 'html') {
-        a.className = 'github-button'
-      }
+        if (!this.isValidUser || (!this.isValidRepo && options.type !== 'follow')) {
+          options.user = 'icey830'
+          options.repo = 'elvns-github-btns'
+        }
 
-      const attrs = this.attrs
-      for (let key in attrs) {
-        if (attrs[key] != null) {
-          if (key === 'data-text') {
-            a.textContent = attrs[key]
-          } else {
-            a.setAttribute(key, attrs[key])
+        return {
+          href: (() => {
+            const base = 'https://github.com'
+            const user = '/' + options.user
+            const repo = user + '/' + options.repo
+            switch (options.type) {
+              case 'follow':
+                return base + user
+              case 'watch':
+                return base + repo + '/subscription'
+              case 'star':
+                return base + repo
+              case 'fork':
+                return base + repo + '/fork'
+              case 'issue':
+                return base + repo + '/issues'
+              case 'download':
+                return base + repo + '/archive/master.zip'
+              default:
+                return base
+            }
+          })(),
+          'data-text': (() => {
+            return this.$options.filters.capitalize(options.type) + (options.type === 'follow' ? ' @' + options.user : '')
+          })(),
+          'data-icon': (() => {
+            if (options.standardIcon) {
+              return
+            }
+            switch (options.type) {
+              case 'watch':
+                return 'octicon-eye'
+              case 'star':
+                return 'octicon-star'
+              case 'fork':
+                return 'octicon-repo-forked'
+              case 'issue':
+                return 'octicon-issue-opened'
+              case 'download':
+                return 'octicon-cloud-download'
+            }
+          })(),
+          'data-size': (() => {
+            if (options.largeButton) {
+              return 'large'
+            }
+          })(),
+          'data-show-count': (() => {
+            if (options.showCount) {
+              switch (options.type) {
+                case 'download':
+                  return
+                default:
+                  return true
+              }
+            }
+          })(),
+          'aria-label': (() => {
+            return this.$options.filters.capitalize(options.type) + (options.type === 'follow' ? ' @' + options.user : ' ' + options.user + '/' + options.repo) + ' on GitHub'
+          })()
+        }
+      },
+      templateHTML () {
+        const a = document.createElement('a')
+
+        if (this.options.syntax === 'html') {
+          a.className = 'github-button'
+        }
+
+        const attrs = this.attrs
+        for (let key in attrs) {
+          if (attrs[key] != null) {
+            if (key === 'data-text') {
+              a.textContent = attrs[key]
+            } else {
+              a.setAttribute(key, attrs[key])
+            }
           }
         }
-      }
-      return '<!-- Place this tag where you want the button to render. -->\n' + ((html) => {
+        return '<!-- Place this tag where you want the button to render. -->\n' + ((html) => {
+          switch (this.options.syntax) {
+            case 'vue':
+              return html.replace(/^<a/, '<github-button').replace(/a>$/, 'github-button>')
+            case 'react':
+              return html.replace(/^<a/, '<GitHubButton').replace(/a>$/, 'GitHubButton>')
+            default:
+              return html
+          }
+        })(a.outerHTML)
+      },
+      scriptHTML () {
         switch (this.options.syntax) {
           case 'vue':
-            return html.replace(/^<a/, '<github-button').replace(/a>$/, 'github-button>')
+            return 'import GithubButton from \'vue-github-button\'\n\nexport default {\n  components: {\n    GithubButton\n  },\n  // ...\n}'
           case 'react':
-            return html.replace(/^<a/, '<GitHubButton').replace(/a>$/, 'GitHubButton>')
+            return 'import GitHubButton from \'react-github-btn\''
           default:
-            return html
+            return '<!-- Place this tag in your head or just before your close body tag. -->\n<script async defer src="https://buttons.github.io/buttons.js"></scr' + 'ipt>'
         }
-      })(a.outerHTML)
+      }
     },
-    scriptHTML () {
-      switch (this.options.syntax) {
-        case 'vue':
-          return 'import GithubButton from \'vue-github-button\'\n\nexport default {\n  components: {\n    GithubButton\n  },\n  // ...\n}'
-        case 'react':
-          return 'import GitHubButton from \'react-github-btn\''
-        default:
-          return '<!-- Place this tag in your head or just before your close body tag. -->\n<script async defer src="https://buttons.github.io/buttons.js"></scr' + 'ipt>'
+    filters: {
+      capitalize (value) {
+        if (!value) return ''
+        value = value.toString()
+        return value.charAt(0).toUpperCase() + value.slice(1)
+      }
+    },
+    methods: {
+      getPreviewAttrs () {
+        return { ...this.attrs, 'data-show-count': this.attrs['data-show-count'] && !this.timeoutID }
       }
     }
-  },
-  filters: {
-    capitalize (value) {
-      if (!value) return ''
-      value = value.toString()
-      return value.charAt(0).toUpperCase() + value.slice(1)
-    }
-  },
-  methods: {
-    getPreviewAttrs () {
-      return { ...this.attrs, 'data-show-count': this.attrs['data-show-count'] && !this.timeoutID }
-    }
   }
-}
 </script>
 
 <style scoped>
-p {
-  overflow-x: auto;
-  overflow-y: hidden;
-}
+  p {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
 
-.form-check-label::before {
-  position: absolute;
-  z-index: 1;
-  display: block;
-  width: 100%;
-  height: 100%;
-  content: '';
-}
+  .form-check-label::before {
+    position: absolute;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    content: '';
+  }
 </style>
