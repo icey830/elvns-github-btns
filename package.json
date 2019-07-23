@@ -1,6 +1,13 @@
 {
   "name": "elvns-github-btns",
-  "version": "0.0.1",
+  "version": "1.0.2",
+  "keywords": [
+    "github",
+    "button",
+    "frontend",
+    "component"
+  ],
+  "license": " Apache-2.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
