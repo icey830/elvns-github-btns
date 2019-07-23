@@ -8,7 +8,7 @@
 
 <script>
   export default {
-    name: 'mybtns',
+    name: 'Snippet',
     props: ['code']
   }
 </script>

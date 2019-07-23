@@ -60,10 +60,10 @@
             <github-button v-bind="getPreviewAttrs()"></github-button>
           </p>
           <div class="form-group">
-            <mybtns :code="templateHTML"></mybtns>
+            <Snippet :code="templateHTML"></Snippet>
           </div>
           <div class="form-group">
-            <mybtns :code="scriptHTML"></mybtns>
+            <Snippet :code="scriptHTML"></Snippet>
           </div>
         </div>
       </div>
@@ -74,13 +74,13 @@
 <script>
   import './main.css'
   import GithubButton from 'vue-github-button'
-  import Mybtns from '@/components/Mybtns'
+  import Snippet from '@/components/Snippet'
 
   export default {
     name: 'app',
     components: {
       GithubButton,
-      Mybtns
+        Snippet
     },
     data () {
       return {
@@ -265,7 +265,7 @@
           case 'react':
             return 'import GitHubButton from \'react-github-btn\''
           default:
-            return '<!-- Place this tag in your head or just before your close body tag. -->\n<script async defer src="https://buttons.github.io/buttons.js"></scr' + 'ipt>'
+            return '<!-- Place this tag in your head or just before your close body tag. -->\n<script async defer src="https://git.elvns.com/btn/button.js"></scr' + 'ipt>'
         }
       }
     },
