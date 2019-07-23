@@ -1,6 +1,6 @@
 {
   "name": "elvns-github-btns",
-  "version": "1.0.2",
+  "version": "1.0.0",
   "keywords": [
     "github",
     "button",
@@ -9,6 +9,8 @@
   ],
   "license": " Apache-2.0",
   "homepage": "https://git.elvns.com/gitbutton/",
+  "readme":"http://git.elvns.com/elvns-github-btns/README.md",
+  "readmeFilename":"README.md",
   "repository": {
     "type": "git",
     "url": "https://github.com/icey830/elvns-github-btns.git"
