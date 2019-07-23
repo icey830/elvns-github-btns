@@ -8,6 +8,11 @@
     "component"
   ],
   "license": " Apache-2.0",
+  "homepage": "https://git.elvns.com/gitbutton/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/icey830/elvns-github-btns.git"
+  },
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
