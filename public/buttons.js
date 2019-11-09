@@ -1,1 +1,0 @@
-../node_modules/github-buttons/dist/buttons.min.js
