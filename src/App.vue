@@ -2,7 +2,7 @@
   <div id="app">
     <form autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false">
       <fieldset class="form-group">
-        <h4>Choose a button</h4>
+        <h4>请选择一个按钮类型</h4>
         <div class="row">
           <div class="col-9 col-sm-6 col-md-4 col-lg-2" v-for="type in types" :key="type.value">
             <div class="form-check">
@@ -30,17 +30,17 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                <input type="checkbox" v-model="options.largeButton"> Large button
+                <input type="checkbox" v-model="options.largeButton"> 使用大按钮
               </label>
             </div>
             <div class="checkbox">
               <label>
-                <input type="checkbox" :disabled="options.type === 'download'" v-model="options.showCount"> Show count
+                <input type="checkbox" :disabled="options.type === 'download'" v-model="options.showCount"> 显示计数值
               </label>
             </div>
             <div class="checkbox">
               <label>
-                <input type="checkbox" v-model="options.standardIcon"> Standard icon
+                <input type="checkbox" v-model="options.standardIcon"> 使用默认图标
               </label>
             </div>
           </div>
